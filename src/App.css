@@ -13,7 +13,7 @@ ul {
   padding: 0;
 }
 
-li > img {
+img {
   width: 500px;
   height: auto;
   border-radius: 30px;
