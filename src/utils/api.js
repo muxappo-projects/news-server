@@ -15,3 +15,11 @@ export function fetchArticleById(id) {
       return data;
     });
 }
+
+export function fetchComments(id) {
+  return request
+    .get(`https://news-api-oery.onrender.com/api/articles/${id}/comments`)
+    .then(({ data }) => {
+      return data;
+    });
+}
