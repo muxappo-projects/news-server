@@ -1,49 +1,54 @@
 import { useEffect, useContext, useState, useRef } from "react";
 import { CurrentArticle } from "../contexts/CurrentArticle";
-import { Loading } from "../contexts/Loading";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CommentSection from "./CommentSection";
 import ScrollButton from "./ScrollButton";
 import * as api from "../utils/api";
+import * as util from "../utils/utils";
 
 export default function ArticlePage() {
   const { currentArticle, setCurrentArticle } = useContext(CurrentArticle);
-  const { isLoading, setIsLoading } = useContext(Loading);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
 
   const commentsRef = useRef(null);
   const topRef = useRef(null);
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    api.fetchArticleById(currentArticle.article_id).then(({ article }) => {
-      const [returnedArticle] = article;
-      setCurrentArticle(returnedArticle);
-    });
-  }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    api.fetchComments(currentArticle.article_id).then(({ comments }) => {
-      setComments(comments);
-      setIsLoading(false);
-    });
+    const articleData = api.fetchArticleById(currentArticle.article_id);
+    const commentData = api.fetchComments(currentArticle.article_id);
+
+    Promise.all([articleData, commentData])
+      .then(([{ article }, { comments }]) => {
+        const [returnedArticle] = article;
+        setComments(comments);
+        setCurrentArticle(returnedArticle);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   return isLoading ? (
     <p>Fetching Article Data...</p>
   ) : (
     <article>
-      <Link to="/articles">
-        <button onClick={() => setIsLoading(true)}>
-          Return to Article List
-        </button>
-      </Link>
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Return to Article List
+      </button>
+
       <h1 ref={topRef}>{currentArticle.title}</h1>
 
-      <p>Written by {currentArticle.author}</p>
+      <p>Written by {currentArticle.author} on</p>
+      <p>{util.toDate(currentArticle.created_at)}</p>
       <img src={currentArticle.article_img_url} alt={currentArticle.title} />
       <p>{currentArticle.body}</p>
       <button
