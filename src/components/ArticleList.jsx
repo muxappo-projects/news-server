@@ -8,12 +8,11 @@ export default function ArticleList() {
   const { isLoading, setIsLoading } = useContext(Loading);
 
   useEffect(() => {
-    setIsLoading(true);
     api.fetchAllArticles().then(({ articles }) => {
       setArticleList(articles);
       setIsLoading(false);
     });
-  }, []);
+  }, [isLoading]);
 
   return isLoading ? (
     <p>Fetching Article Data...</p>
@@ -22,15 +21,7 @@ export default function ArticleList() {
       <h2>Available Articles</h2>
       <ul>
         {articleList.map((article) => {
-          return (
-            <ArticleCard
-              key={article.article_id}
-              title={article.title}
-              image={article.article_img_url}
-              author={article.author}
-              votes={article.votes}
-            />
-          );
+          return <ArticleCard key={article.article_id} article={article} />;
         })}
       </ul>
     </main>
