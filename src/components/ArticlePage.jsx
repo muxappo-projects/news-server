@@ -42,13 +42,13 @@ export default function ArticlePage() {
           navigate(-1);
         }}
       >
-        Return to Article List
+        Back
       </button>
 
       <h1 ref={topRef}>{currentArticle.title}</h1>
 
       <p>Written by {currentArticle.author} on</p>
-      <p>{util.toDate(currentArticle.created_at)}</p>
+      <p>{util.dateAndTime(currentArticle.created_at)}</p>
       <img src={currentArticle.article_img_url} alt={currentArticle.title} />
       <p>{currentArticle.body}</p>
       <button
