@@ -8,11 +8,12 @@ export default function ArticleList() {
   const { isLoading, setIsLoading } = useContext(Loading);
 
   useEffect(() => {
+    setIsLoading(true);
     api.fetchAllArticles().then(({ articles }) => {
       setArticleList(articles);
       setIsLoading(false);
     });
-  }, [isLoading]);
+  }, []);
 
   return isLoading ? (
     <p>Fetching Article Data...</p>

@@ -1,13 +1,14 @@
 import ArticleList from "./ArticleList";
 import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
     <div>
-      <h2>Home Page</h2>
-      <p>(Nav Bar will go here)</p>
       <NavBar />
-      <ArticleList />
+      <Link to="/articles">
+        <button>Browse Articles</button>
+      </Link>
     </div>
   );
 }
