@@ -50,14 +50,14 @@ export default function ArticlePage() {
 
       <p>Written by {currentArticle.author} on</p>
       <p>{util.dateAndTime(currentArticle.created_at)}</p>
-      <img src={currentArticle.article_img_url} alt={currentArticle.title} />
+      <img
+        className="article-img"
+        src={currentArticle.article_img_url}
+        alt={currentArticle.title}
+      />
       <p>{currentArticle.body}</p>
       <Voter />
-      <button
-        onClick={() =>
-          showComments ? setShowComments(false) : setShowComments(true)
-        }
-      >
+      <button onClick={() => setShowComments(!showComments)}>
         {showComments
           ? "Hide comments"
           : `Show comments (${currentArticle.comment_count})`}

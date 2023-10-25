@@ -7,16 +7,30 @@
 
 ul {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   list-style-type: none;
   padding: 0;
 }
 
-img {
-  width: 500px;
+li > img {
+  width: 400px;
   height: auto;
   border-radius: 30px;
+}
+
+.topic-button {
+  width: 300px;
+  height: 100px;
+  font-size: 2rem;
+}
+
+.sortby-button {
+  margin: 5px;
+}
+
+.order-button {
+  margin-left: 10px;
 }
 
 label {
@@ -30,6 +44,11 @@ label {
   margin: 20px;
 }
 
+.article-img {
+  width: 500px;
+  border-radius: 30px;
+}
+
 .voter button {
   margin: 10px;
 }
@@ -41,9 +60,24 @@ label {
 .comment-field {
   margin-bottom: 30px;
 }
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1380px) {
+  ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  li > img {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
   ul {
     grid-template-columns: 1fr;
+  }
+  li {
+    font-size: 0.9rem;
   }
 }
 

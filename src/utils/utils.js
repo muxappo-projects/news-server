@@ -10,3 +10,14 @@ export function dateAndTime(input) {
 export function date(input) {
   return moment(input).format("Do MMMM YYYY");
 }
+
+export function formatContent(word) {
+  if (!word) return "";
+
+  return word
+    .split(" ")
+    .map((word) => {
+      return word[0].toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}

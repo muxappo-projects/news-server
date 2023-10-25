@@ -17,7 +17,6 @@ export default function CommentField({ setCommentsList }) {
     api
       .postComment(name, commentBody, currentArticle.article_id)
       .then((created_comment) => {
-        console.log(created_comment);
         setCommentsList((oldState) => {
           return [...oldState, created_comment];
         });
