@@ -4,8 +4,27 @@ const request = axios.create({
   baseURL: "https://news-api-oery.onrender.com/api",
 });
 
-export function fetchAllArticles() {
-  return request.get("/articles").then(({ data }) => {
+export function fetchArticles(topic, sortby, order) {
+  let queryParams = [];
+  if (topic) {
+    queryParams.push(`topic=${topic}`);
+  }
+  if (sortby) {
+    queryParams.push(`sortby=${sortby}`);
+  }
+  if (order) {
+    queryParams.push(`order=${order}`);
+  }
+
+  const queryStr = queryParams.length ? `?${queryParams.join("&")}` : "";
+
+  return request.get(`/articles${queryStr}`).then(({ data }) => {
+    return data;
+  });
+}
+
+export function fetchTopics() {
+  return request.get("/topics").then(({ data }) => {
     return data;
   });
 }

@@ -12,11 +12,7 @@ const CommentSection = forwardRef(({ commentsList, setCommentsList }, ref) => {
   return (
     <section ref={ref} className="comment-section">
       {postComment && <CommentField setCommentsList={setCommentsList} />}
-      <button
-        onClick={() => {
-          postComment ? setPostComment(false) : setPostComment(true);
-        }}
-      >
+      <button onClick={() => setPostComment(!postComment)}>
         {postComment ? "Cancel" : "Post comment"}
       </button>
 
