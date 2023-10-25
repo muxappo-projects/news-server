@@ -1,14 +1,12 @@
-import { useEffect, useState, useContext } from "react";
-import { Loading } from "../contexts/Loading";
+import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard";
 import * as api from "../utils/api";
 
 export default function ArticleList() {
   const [articleList, setArticleList] = useState("");
-  const { isLoading, setIsLoading } = useContext(Loading);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
     api.fetchAllArticles().then(({ articles }) => {
       setArticleList(articles);
       setIsLoading(false);
