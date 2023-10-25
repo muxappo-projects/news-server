@@ -3,6 +3,7 @@ import { CurrentArticle } from "../contexts/CurrentArticle";
 import { useNavigate } from "react-router-dom";
 import CommentSection from "./CommentSection";
 import ScrollButton from "./ScrollButton";
+import Voter from "./Voter";
 import * as api from "../utils/api";
 import * as util from "../utils/utils";
 
@@ -51,6 +52,7 @@ export default function ArticlePage() {
       <p>{util.dateAndTime(currentArticle.created_at)}</p>
       <img src={currentArticle.article_img_url} alt={currentArticle.title} />
       <p>{currentArticle.body}</p>
+      <Voter />
       <button
         onClick={() =>
           showComments ? setShowComments(false) : setShowComments(true)
