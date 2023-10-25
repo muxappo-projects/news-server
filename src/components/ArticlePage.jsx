@@ -58,13 +58,15 @@ export default function ArticlePage() {
           showComments ? setShowComments(false) : setShowComments(true)
         }
       >
-        {showComments ? "Hide comments" : "Show comments"}
+        {showComments
+          ? "Hide comments"
+          : `Show comments (${currentArticle.comment_count})`}
       </button>
 
       {showComments && (
         <CommentSection
           commentsList={comments}
-          commentCount={currentArticle.comment_count}
+          setCommentsList={setComments}
           ref={commentsRef}
         />
       )}

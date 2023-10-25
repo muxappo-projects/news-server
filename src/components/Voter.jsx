@@ -26,7 +26,7 @@ export default function Voter() {
   }
 
   return (
-    <section>
+    <section className="voter">
       <button
         disabled={voteDifference === 1}
         onClick={() => {

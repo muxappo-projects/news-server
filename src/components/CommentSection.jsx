@@ -1,14 +1,25 @@
 import CommentCard from "./CommentCard";
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import CommentField from "./CommentField";
 
-const CommentSection = forwardRef(({ commentsList, commentCount }, ref) => {
+const CommentSection = forwardRef(({ commentsList, setCommentsList }, ref) => {
+  const [postComment, setPostComment] = useState(false);
+
   useEffect(() => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   return (
-    <section ref={ref}>
-      <h4>Comments: {commentCount}</h4>
+    <section ref={ref} className="comment-section">
+      {postComment && <CommentField setCommentsList={setCommentsList} />}
+      <button
+        onClick={() => {
+          postComment ? setPostComment(false) : setPostComment(true);
+        }}
+      >
+        {postComment ? "Cancel" : "Post comment"}
+      </button>
+
       <ul>
         {commentsList.map((comment) => {
           return (
