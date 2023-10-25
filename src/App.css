@@ -19,6 +19,28 @@ img {
   border-radius: 30px;
 }
 
+label {
+  display: block;
+  margin: 10px;
+}
+
+.voter {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.voter button {
+  margin: 10px;
+}
+
+.comment-section {
+  margin: 30px;
+}
+
+.comment-field {
+  margin-bottom: 30px;
+}
 @media only screen and (max-width: 1100px) {
   ul {
     grid-template-columns: 1fr;

@@ -33,3 +33,14 @@ export function incVotes(value, id) {
     }
   );
 }
+
+export function postComment(name, comment, id) {
+  return request
+    .post(`/articles/${id}/comments`, {
+      username: name,
+      commentBody: comment,
+    })
+    .then(({ data: { created_comment } }) => {
+      return created_comment;
+    });
+}
