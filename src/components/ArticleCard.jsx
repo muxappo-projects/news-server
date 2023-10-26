@@ -14,8 +14,11 @@ export default function ArticleCard({ article }) {
       >
         <h3>{article.title}</h3>
       </Link>
+
       <h4>By {article.author}</h4>
+
       <img src={article.article_img_url} alt={article.title} />
+
       <p>{util.date(article.created_at)}</p>
       <p>Comments: {article.comment_count}</p>
       <p>{article.votes} votes</p>

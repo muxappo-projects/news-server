@@ -20,6 +20,7 @@ export default function Topics({ setTopic }) {
     ) : (
       <div className="topics-page">
         <h2>Available Topics:</h2>
+
         <ul className="topics-wrapper">
           {topicsList.map((topic) => {
             return (
