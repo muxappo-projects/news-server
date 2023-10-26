@@ -4,7 +4,7 @@ import { User } from "../contexts/User";
 
 export default function LoginPage() {
   const [userInput, setUserInput] = useState("");
-  const { currentUser, setCurrentUser } = useContext(User);
+  const { setCurrentUser } = useContext(User);
 
   const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ export default function LoginPage() {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="username-input">Username</label>
+
       <input
         required
         id="username-input"
@@ -25,6 +26,7 @@ export default function LoginPage() {
           setUserInput(e.target.value);
         }}
       />
+
       <button>Log In</button>
     </form>
   );

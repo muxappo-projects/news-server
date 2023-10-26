@@ -17,6 +17,7 @@ li > img {
   width: 400px;
   height: auto;
   border-radius: 30px;
+  padding: 20px 0px;
 }
 
 .topic-button {

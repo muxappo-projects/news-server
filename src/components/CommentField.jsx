@@ -13,7 +13,11 @@ export default function CommentField({ setCommentsList }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     setCommentSent(true);
+    setTimeout(() => {
+      setCommentSent(false);
+    }, 2000);
 
     api
       .postComment(currentUser, commentBody, currentArticle.article_id)
@@ -32,6 +36,7 @@ export default function CommentField({ setCommentsList }) {
   return (
     <form method="post" onSubmit={handleSubmit} className="comment-field">
       <label htmlFor="comment-body">What do you have to say?</label>
+
       <textarea
         name=""
         id="comment-body"
@@ -40,7 +45,9 @@ export default function CommentField({ setCommentsList }) {
         value={commentBody}
         onChange={(e) => setCommentBody(e.target.value)}
       ></textarea>
+
       <button>Post</button>
+
       {commentSent && <p>Comment sent!</p>}
       {errMsg && <p>{errMsg}</p>}
     </form>
