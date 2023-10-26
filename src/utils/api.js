@@ -42,6 +42,12 @@ export function fetchComments(id) {
   });
 }
 
+export function fetchUsers() {
+  return request.get("/users").then(({ data: { users } }) => {
+    return users;
+  });
+}
+
 export function incVotes(value, id) {
   return request.patch(`/articles/${id}`, { inc_votes: value }).then(
     ({
