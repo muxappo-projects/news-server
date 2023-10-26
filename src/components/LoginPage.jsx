@@ -5,15 +5,23 @@ import * as api from "../utils/api";
 
 export default function LoginPage() {
   const { setCurrentUser } = useContext(User);
-  const [userInput, setUserInput] = useState("");
-  const [rawUserData, setRawUserData] = useState([]);
+
   const [invalidUser, setInvalidUser] = useState(false);
+  const [rawUserData, setRawUserData] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [errMsg, setErrMsg] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.fetchUsers().then((users) => {
-      setRawUserData(users);
-    });
+    api
+      .fetchUsers()
+      .then((users) => {
+        setRawUserData(users);
+      })
+      .catch(() => {
+        setErrMsg("Error fetching user data - Please return to Home");
+      });
   }, []);
 
   function handleSubmit(e) {
@@ -33,9 +41,10 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit}>
+      {errMsg && <p>{errMsg}</p>}
       {invalidUser && <p>Username doesn't exist!</p>}
-      <label htmlFor="username-input">Username</label>
 
+      <label htmlFor="username-input">Username</label>
       <input
         required
         id="username-input"

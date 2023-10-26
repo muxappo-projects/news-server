@@ -12,54 +12,77 @@ export default function ArticleList({ topic = null }) {
 
   const [sortby, setSortBy] = useState("date");
   const [order, setOrder] = useState("desc");
+  const [errMsg, setErrMsg] = useState(null);
 
   const navigate = useNavigate();
   const topRef = useRef(null);
 
   useEffect(() => {
-    api.fetchArticles(topic, sortby, order).then(({ articles }) => {
-      setArticleList(articles);
-      setIsLoading(false);
-    });
+    api
+      .fetchArticles(topic, sortby, order)
+      .then(({ articles }) => {
+        setArticleList(articles);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setErrMsg("Error fetching Article data");
+      });
   }, [sortby, order]);
 
-  return isLoading ? (
-    <p>Fetching Article Data...</p>
-  ) : (
-    <main>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </button>
+  return (
+    <>
+      {errMsg ? (
+        <div>
+          <p>{errMsg}</p>
+          <Link to="/">
+            <button
+              onClick={() => {
+                setErrMsg(null);
+              }}
+            >
+              Return to Safety
+            </button>
+          </Link>
+        </div>
+      ) : isLoading ? (
+        <p>Fetching Article Data...</p>
+      ) : (
+        <main>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </button>
 
-      <h1 ref={topRef}>
-        {topic ? `${util.formatContent(topic)} Articles` : "Available Articles"}
-      </h1>
+          <h1 ref={topRef}>
+            {topic ? `${util.formatContent(topic)} Articles` : "All Articles"}
+          </h1>
 
-      <div>
-        <SortBy sortby={sortby} setSortBy={setSortBy} />
-        Order:
-        <button
-          className="order-button"
-          onClick={() =>
-            setOrder(() => {
-              return order === "asc" ? "desc" : "asc";
-            })
-          }
-        >
-          {util.formatContent(order)}.
-        </button>
-      </div>
+          <div>
+            <SortBy sortby={sortby} setSortBy={setSortBy} />
+            Order:
+            <button
+              className="order-button"
+              onClick={() =>
+                setOrder(() => {
+                  return order === "asc" ? "desc" : "asc";
+                })
+              }
+            >
+              {util.formatContent(order)}.
+            </button>
+          </div>
 
-      <ul>
-        {articleList.map((article) => {
-          return <ArticleCard key={article.article_id} article={article} />;
-        })}
-      </ul>
-      <ScrollButton ref={topRef} />
-    </main>
+          <ul>
+            {articleList.map((article) => {
+              return <ArticleCard key={article.article_id} article={article} />;
+            })}
+          </ul>
+          <ScrollButton ref={topRef} />
+        </main>
+      )}
+    </>
   );
 }
