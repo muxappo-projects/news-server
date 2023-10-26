@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import ArticlePage from "./components/ArticlePage";
 import ArticleList from "./components/ArticleList";
 import Topics from "./components/Topics";
+import LoginPage from "./components/LoginPage";
 import "./App.css";
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           path={`/topics/${topic}/articles`}
           element={<ArticleList topic={topic} />}
         />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </main>
   );

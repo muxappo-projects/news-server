@@ -6,6 +6,7 @@ const request = axios.create({
 
 export function fetchArticles(topic, sortby, order) {
   let queryParams = [];
+
   if (topic) {
     queryParams.push(`topic=${topic}`);
   }
@@ -62,4 +63,8 @@ export function postComment(name, comment, id) {
     .then(({ data: { created_comment } }) => {
       return created_comment;
     });
+}
+
+export function deleteComment(id) {
+  return request.delete(`/comments/${id}`);
 }

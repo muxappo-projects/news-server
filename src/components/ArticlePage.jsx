@@ -10,8 +10,8 @@ import * as util from "../utils/utils";
 export default function ArticlePage() {
   const { currentArticle, setCurrentArticle } = useContext(CurrentArticle);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [showComments, setShowComments] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [comments, setComments] = useState([]);
 
   const commentsRef = useRef(null);
@@ -32,7 +32,7 @@ export default function ArticlePage() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [comments]);
 
   return isLoading ? (
     <p>Fetching Article Data...</p>
@@ -50,12 +50,15 @@ export default function ArticlePage() {
 
       <p>Written by {currentArticle.author} on</p>
       <p>{util.dateAndTime(currentArticle.created_at)}</p>
+
       <img
         className="article-img"
         src={currentArticle.article_img_url}
         alt={currentArticle.title}
       />
+
       <p>{currentArticle.body}</p>
+
       <Voter />
       <button onClick={() => setShowComments(!showComments)}>
         {showComments

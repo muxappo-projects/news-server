@@ -34,6 +34,7 @@ export default function ArticleList({ topic = null }) {
       >
         Back
       </button>
+
       <h1 ref={topRef}>
         {topic ? `${util.formatContent(topic)} Articles` : "Available Articles"}
       </h1>
@@ -52,6 +53,7 @@ export default function ArticleList({ topic = null }) {
           {util.formatContent(order)}.
         </button>
       </div>
+
       <ul>
         {articleList.map((article) => {
           return <ArticleCard key={article.article_id} article={article} />;

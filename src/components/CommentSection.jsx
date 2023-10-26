@@ -1,9 +1,12 @@
 import CommentCard from "./CommentCard";
-import { forwardRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { forwardRef, useEffect, useState, useContext } from "react";
+import { User } from "../contexts/User";
 import CommentField from "./CommentField";
 
 const CommentSection = forwardRef(({ commentsList, setCommentsList }, ref) => {
   const [postComment, setPostComment] = useState(false);
+  const { currentUser } = useContext(User);
 
   useEffect(() => {
     ref.current.scrollIntoView({ behavior: "smooth" });
@@ -11,10 +14,17 @@ const CommentSection = forwardRef(({ commentsList, setCommentsList }, ref) => {
 
   return (
     <section ref={ref} className="comment-section">
+      {currentUser ? (
+        <button onClick={() => setPostComment(!postComment)}>
+          {postComment ? "Cancel" : "Post comment"}
+        </button>
+      ) : (
+        <Link to="/login">
+          <button>Log In to Post a Comment</button>
+        </Link>
+      )}
+
       {postComment && <CommentField setCommentsList={setCommentsList} />}
-      <button onClick={() => setPostComment(!postComment)}>
-        {postComment ? "Cancel" : "Post comment"}
-      </button>
 
       <ul>
         {commentsList.map((comment) => {
@@ -25,6 +35,7 @@ const CommentSection = forwardRef(({ commentsList, setCommentsList }, ref) => {
               author={comment.author}
               votes={comment.votes}
               created_at={comment.created_at}
+              id={comment.comment_id}
             />
           );
         })}
