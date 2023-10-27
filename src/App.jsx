@@ -20,10 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<ArticleList />} />
-        <Route
-          path={`/article-${currentArticle.article_id}`}
-          element={<ArticlePage />}
-        />
+        <Route path={`/articles/:id`} element={<ArticlePage />} />
         <Route path="/topics" element={<Topics />} />
         <Route path={`/topics/:topic/articles`} element={<ArticleList />} />
         <Route path="/login" element={<LoginPage />} />

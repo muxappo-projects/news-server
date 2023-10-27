@@ -9,7 +9,7 @@ export default function ArticleCard({ article }) {
   return (
     <li>
       <Link
-        to={`/article-${article.article_id}`}
+        to={`/articles/${article.article_id}`}
         onClick={() => setCurrentArticle(article)}
       >
         <h3>{article.title}</h3>

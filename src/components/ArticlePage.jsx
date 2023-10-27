@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState, useRef } from "react";
 import { CurrentArticle } from "../contexts/CurrentArticle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentSection from "./CommentSection";
 import ScrollButton from "./ScrollButton";
 import Voter from "./Voter";
@@ -18,10 +18,11 @@ export default function ArticlePage() {
   const topRef = useRef(null);
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
-    const articleData = api.fetchArticleById(currentArticle.article_id);
-    const commentData = api.fetchComments(currentArticle.article_id);
+    const articleData = api.fetchArticleById(id);
+    const commentData = api.fetchComments(id);
 
     Promise.all([articleData, commentData])
       .then(([{ article }, { comments }]) => {
