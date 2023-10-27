@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as api from "../utils/api";
 import * as util from "../utils/utils";
 
-export default function Topics({ setTopic }) {
+export default function Topics() {
   const [topicsList, setTopicsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
@@ -46,10 +46,7 @@ export default function Topics({ setTopic }) {
               return (
                 <li key={topicsList.indexOf(topic)}>
                   <Link to={`/topics/${topic.slug}/articles`}>
-                    <button
-                      className="topic-button"
-                      onClick={() => setTopic(topic.slug)}
-                    >
+                    <button className="topic-button">
                       {util.formatContent(topic.slug)}
                     </button>
                   </Link>
