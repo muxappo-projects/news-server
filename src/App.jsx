@@ -12,7 +12,6 @@ import "./App.css";
 
 export default function App() {
   const { currentArticle } = useContext(CurrentArticle);
-  const [topic, setTopic] = useState(null);
 
   return (
     <main>
@@ -25,11 +24,8 @@ export default function App() {
           path={`/article-${currentArticle.article_id}`}
           element={<ArticlePage />}
         />
-        <Route path="/topics" element={<Topics setTopic={setTopic} />} />
-        <Route
-          path={`/topics/${topic}/articles`}
-          element={<ArticleList topic={topic} />}
-        />
+        <Route path="/topics" element={<Topics />} />
+        <Route path={`/topics/:topic/articles`} element={<ArticleList />} />
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="*" element={<ErrorPage />} />

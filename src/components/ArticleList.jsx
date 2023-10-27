@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import SortBy from "./SortBy";
 import ScrollButton from "./ScrollButton";
 import * as api from "../utils/api";
 import * as util from "../utils/utils";
 
-export default function ArticleList({ topic = null }) {
+export default function ArticleList() {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,6 +15,7 @@ export default function ArticleList({ topic = null }) {
   const [errMsg, setErrMsg] = useState(null);
 
   const navigate = useNavigate();
+  const { topic } = useParams();
   const topRef = useRef(null);
 
   useEffect(() => {
