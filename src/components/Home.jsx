@@ -7,12 +7,12 @@ export default function Home() {
   const { currentUser } = useContext(User);
   return (
     <div>
-      <NavBar />
       {!currentUser && (
         <Link to="/login">
-          <button className="login-button">Login</button>
+          <button id="home-login-button">Login</button>
         </Link>
       )}
+      <NavBar />
     </div>
   );
 }

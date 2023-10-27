@@ -35,20 +35,23 @@ export default function CommentField({ setCommentsList }) {
 
   return (
     <form method="post" onSubmit={handleSubmit} className="comment-field">
-      <label htmlFor="comment-body">What do you have to say?</label>
+      <label className="comment-label" htmlFor="comment-body">
+        What do you have to say?
+      </label>
 
       <textarea
         name=""
-        id="comment-body"
+        className="comment-input"
         cols="60"
         rows="5"
         value={commentBody}
+        placeholder="Tippity tap sending off my opinion..."
         onChange={(e) => setCommentBody(e.target.value)}
       ></textarea>
-
-      <button>Post</button>
-
-      {commentSent && <p>Comment sent!</p>}
+      <div className="post-comment">
+        <button>Post</button>
+        {commentSent && <p className="sent-msg">Comment sent!</p>}
+      </div>
       {errMsg && <p>{errMsg}</p>}
     </form>
   );

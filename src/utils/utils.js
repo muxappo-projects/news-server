@@ -11,6 +11,10 @@ export function date(input) {
   return moment(input).format("Do MMMM YYYY");
 }
 
+export function commentDate(input) {
+  return moment(input).format("D/MM/YY");
+}
+
 export function formatContent(word) {
   if (!word) return "";
 
