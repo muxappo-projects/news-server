@@ -73,5 +73,4 @@ export function postComment(name, comment, id) {
 
 export function deleteComment(id) {
   return request.delete(`/comments/${id}`);
-  d;
 }
