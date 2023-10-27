@@ -4,10 +4,10 @@ export default function NavBar() {
   return (
     <nav>
       <Link to={"/topics"}>
-        <button>Browse By Topic</button>
+        <button id="topic-button">Browse By Topic</button>
       </Link>
       <Link to="/articles">
-        <button>Browse All Articles</button>
+        <button id="all-button">Browse All Articles</button>
       </Link>
     </nav>
   );

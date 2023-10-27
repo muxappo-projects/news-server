@@ -15,18 +15,23 @@ const CommentSection = forwardRef(({ commentsList, setCommentsList }, ref) => {
   return (
     <section ref={ref} className="comment-section">
       {currentUser ? (
-        <button onClick={() => setPostComment(!postComment)}>
+        <button
+          className="show-comments-btn"
+          onClick={() => setPostComment(!postComment)}
+        >
           {postComment ? "Cancel" : "Post comment"}
         </button>
       ) : (
         <Link to="/login">
-          <button>Log In to Post a Comment</button>
+          <button className="show-comments-btn">
+            Log In to Post a Comment
+          </button>
         </Link>
       )}
 
       {postComment && <CommentField setCommentsList={setCommentsList} />}
 
-      <ul>
+      <ul className="comments-list">
         {commentsList.map((comment) => {
           return (
             <CommentCard

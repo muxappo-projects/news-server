@@ -5,9 +5,9 @@ import { User } from "../contexts/User";
 export default function Header() {
   const { currentUser, setCurrentUser } = useContext(User);
   return (
-    <div className="header">
+    <div>
       <Link to={"/"}>
-        <h1>NC News</h1>
+        <h1 className="header">NC News</h1>
       </Link>
       {currentUser && (
         <div className="logged-in-wrapper">
